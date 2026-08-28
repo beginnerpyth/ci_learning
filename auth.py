@@ -17,6 +17,8 @@ def token_creator(real_data:dict):
     jwt_created=jwt.encode(copy_data,secret_key,algorithm=alg)
     return jwt_created
 
+
+
 def token_decoder(real_token:str=Depends(token_url)):
     try:
         copy_token=jwt.decode(real_token,secret_key,algorithms=[alg])
