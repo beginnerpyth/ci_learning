@@ -11,11 +11,12 @@ on:
 
 jobs:
   test:
-
     runs-on: ubuntu-latest
 
-    steps:
+    env:
+      database: "sqlite:///./test.db"
 
+    steps:
       - name: Checkout code
         uses: actions/checkout@v4
 

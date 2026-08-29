@@ -20,7 +20,7 @@ settings=Settings()
 db_connector=create_engine(settings.database)
 db_creator=sessionmaker(bind=db_connector)
 def db():
-    db_created=db_creator()
+    db_created=db_creator()#so when user calls it gets it own isolated connection
     try:
         yield db_created
     finally:
