@@ -1,23 +1,25 @@
-from fastapi import FastAPI,HTTPException,UploadFile,File,Depends,APIRouter
 import os
 
-router=APIRouter()
-os.makedirs('uploads',exist_ok=True)
-@router.post('/uploadfile')
-def upload_file(files:UploadFile=File(...)):
-    img_type=['image/jpeg','image/png','image/heic']
-    if files.content_type not in img_type:
-        raise HTTPException(detail=('invalid image type'),status_code=403)
-    inside_file=files.file.read()
-    total_storage=len(inside_file)
-    if total_storage>2*1024*1000:
-        return 'file size too large'
-    file_location=f'uploads/{files.filename}'
-    with open(file_location,'wb')as f:
-        f.write(inside_file)
-        return {'message':'its sucessful','file_name':files.filename,'file_storage':total_storage}
+from fastapi import APIRouter, File, HTTPException, UploadFile
+
+router = APIRouter()
+os.makedirs("new_uploads", exist_ok=True)
 
 
-
-
-
+@router.post("/uploads")
+def uploading_file(uploadfile: UploadFile = File(...)):
+    img_type = ["image/jpg", "image/jpeg", "image/heic", "image/png"]
+    if uploadfile.content_type not in img_type:
+        raise HTTPException(detail="invalid datatype", status_code=402)
+    file_content = uploadfile.file.read()
+    file_storage = len(file_content)
+    if file_storage > 2 * 1024 * 1024:
+        raise HTTPException(detail="the size is too large", status_code=403)
+    file_path = f"new_uploads/{uploadfile.filename}"
+    with open(file_path, "wb") as f:
+        f.write(file_content)
+        return {
+            "detail": "its passed",
+            "file_name": uploadfile.filename,
+            "filesize": "file_storage",
+        }

@@ -1,32 +1,35 @@
-from sqlalchemy import Table,Integer,Column,String,create_engine
-from sqlalchemy.orm import sessionmaker,Session,DeclarativeBase
-from pydantic_settings import BaseSettings
 from pydantic import BaseModel
+from pydantic_settings import BaseSettings, SettingsConfigDict
+from sqlalchemy import create_engine
+from sqlalchemy.orm import DeclarativeBase, sessionmaker
 
 
 class base(BaseModel):
-    pass 
+    pass
+
 
 class tablemaker(DeclarativeBase):
     pass
 
+
+
+
+
 class Settings(BaseSettings):
-    database:str
+    database: str
 
-    class Config():
-        env_file='.env'
-settings=Settings()
+    model_config = SettingsConfigDict(env_file=".env")
 
-db_connector=create_engine(settings.database)
-db_creator=sessionmaker(bind=db_connector)
+
+settings = Settings()
+
+db_connector = create_engine(settings.database)
+db_creator = sessionmaker(bind=db_connector)
+
+
 def db():
-    db_created=db_creator()#so when user calls it gets it own isolated connection
+    db_created = db_creator()  # so when user calls it gets it own isolated connection
     try:
         yield db_created
     finally:
         db_created.close()
-
-
-
-
-
