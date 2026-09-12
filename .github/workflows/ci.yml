@@ -40,7 +40,6 @@ jobs:
           ruff check .
       
       - name: Check formatting
-        run: |git
+        run: |
           ruff format --check .
   #nononon
-  
