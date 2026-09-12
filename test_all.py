@@ -22,7 +22,7 @@ client = TestClient(app)
 
 
 def test_one():
-    a = 2
+    a = 1
     b = 3
     assert a + b == 5
 
