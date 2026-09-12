@@ -12,9 +12,6 @@ class tablemaker(DeclarativeBase):
     pass
 
 
-
-
-
 class Settings(BaseSettings):
     database: str
 
