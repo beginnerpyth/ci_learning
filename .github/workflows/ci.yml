@@ -1,17 +1,22 @@
+
 name: CI
 
 on:
   push:
     branches:
       - main
-
+      - feature/new
   pull_request:
     branches:
       - main
 
+permissions:
+  contents: read
+
 jobs:
   test:
     runs-on: ubuntu-latest
+
     strategy:
       matrix:
         python-version: ["3.11", "3.12"]
@@ -25,30 +30,23 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
           cache: "pip"
-      
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+          pip install ruff
+
       - name: Check Ruff
-        run: |
-          ruff --version
+        run: ruff --version
+
       - name: Run tests
         env:
           DATABASE: ${{ secrets.DATABASE }}
-        run: |
-          pytest
+        run: pytest
 
       - name: Run linter
-        run: |
-          ruff check .
-      
+        run: ruff check .
+
       - name: Check formatting
-        run: |
-          ruff format --check .
-  #nononon
-#hahahhaha
-##just the differnce
-
-
-
+        run: ruff format --check .
