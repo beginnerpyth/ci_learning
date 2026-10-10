@@ -14,7 +14,7 @@ permissions:
   contents: read
 
 jobs:
-  test:
+  test:  
     runs-on: ubuntu-latest
 
     strategy:
@@ -43,6 +43,7 @@ jobs:
       - name: Run tests
         env:
           DATABASE: ${{ secrets.DATABASE }}
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
         run: pytest
 
       - name: Run linter

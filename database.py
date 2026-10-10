@@ -14,6 +14,7 @@ class tablemaker(DeclarativeBase):
 
 class Settings(BaseSettings):
     database: str
+    secret_key: str
 
     model_config = SettingsConfigDict(env_file=".env")
 
