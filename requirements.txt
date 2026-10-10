@@ -11,3 +11,5 @@ python-multipart
 pytest
 httpx2
 ruff
+boto3
+

@@ -1,9 +1,10 @@
-import os
-
+import boto3
 from fastapi import APIRouter, File, HTTPException, UploadFile
 
 router = APIRouter()
-os.makedirs("new_uploads", exist_ok=True)
+
+s3 = boto3.client("s3")
+BUCKET_NAME = "bakketo-7779"
 
 
 @router.post("/uploads")
@@ -15,11 +16,12 @@ def uploading_file(uploadfile: UploadFile = File(...)):
     file_storage = len(file_content)
     if file_storage > 2 * 1024 * 1024:
         raise HTTPException(detail="the size is too large", status_code=403)
-    file_path = f"new_uploads/{uploadfile.filename}"
-    with open(file_path, "wb") as f:
-        f.write(file_content)
-        return {
-            "detail": "its passed",
-            "file_name": uploadfile.filename,
-            "filesize": "file_storage",
-        }
+
+    s3_key = f"uploads/{uploadfile.filename}"
+    s3.put_object(Bucket=BUCKET_NAME, Key=s3_key, Body=file_content)
+
+    return {
+        "detail": "its passed",
+        "file_name": uploadfile.filename,
+        "filesize": file_storage,
+    }
