@@ -93,4 +93,4 @@ jobs:
           context: .
           platforms: linux/arm64
           push: true
-          tags: 157693542014.dkr.ecr.ap-southeast-2.amazonaws.com/uni_project_rbac:latest
+          tags: 157693542014.dkr.ecr.ap-southeast-2.amazonaws.com/newapp_latest:latest
