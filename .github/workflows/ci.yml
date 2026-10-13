@@ -94,7 +94,7 @@ jobs:
           platforms: linux/arm64
           push: true
           tags: 157693542014.dkr.ecr.ap-southeast-2.amazonaws.com/newapp_latest:latest
-            - name: Deploy to EC2 via SSM
+      - name: Deploy to EC2 via SSM
         env:
           INSTANCE_ID: i-03bc4707f8d6374df
         run: |
