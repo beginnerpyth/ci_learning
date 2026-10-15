@@ -96,7 +96,7 @@ jobs:
           tags: 157693542014.dkr.ecr.ap-southeast-2.amazonaws.com/wed:latest
       - name: Deploy to EC2 via SSM
         env:
-          INSTANCE_ID: i-03bc4707f8d6374df
+          INSTANCE_ID: i-008a39a3649404ee5
         run: |
           CMD_ID=$(aws ssm send-command \
             --instance-ids "$INSTANCE_ID" \
