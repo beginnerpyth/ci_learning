@@ -75,7 +75,7 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::157693542014:role/github-action
+          role-to-assume: arn:aws:iam::157693542014:role/incline
           aws-region: ap-southeast-2
 
       - name: Log in to ECR
@@ -93,10 +93,10 @@ jobs:
           context: .
           platforms: linux/arm64
           push: true
-          tags: 157693542014.dkr.ecr.ap-southeast-2.amazonaws.com/wed:latest
+          tags: 157693542014.dkr.ecr.ap-southeast-2.amazonaws.com/loki:latest 
       - name: Deploy to EC2 via SSM
         env:
-          INSTANCE_ID: i-008a39a3649404ee5
+          INSTANCE_ID: i-0bb597c5d0b83b345
         run: |
           CMD_ID=$(aws ssm send-command \
             --instance-ids "$INSTANCE_ID" \
