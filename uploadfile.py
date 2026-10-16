@@ -21,7 +21,7 @@ def uploading_file(uploadfile: UploadFile = File(...)):
     s3.put_object(Bucket=BUCKET_NAME, Key=s3_key, Body=file_content)
 
     return {
-        "detail": "its passed new cd here",
+        "detail": "its passed new cd here and there",
         "file_name": uploadfile.filename,
         "filesize": file_storage,
     }
