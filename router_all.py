@@ -20,12 +20,12 @@ fake_database = {1: {"day": "sunday", "course_name": "math"}}
 
 @router.post("/login")
 def login(form_layout: OAuth2PasswordRequestForm = Depends()):
-    if form_layout.username == "teacher" and form_layout.password == "teacher123":
+    if form_layout.username == "abhishek" and form_layout.password == "abhishek123":
         token_created_teacher = token_creator(
             {"email": "teacher@universal.com", "name": "uni_teacher", "role": "teacher"}
         )
         return {"access_token": token_created_teacher, "token_type": "bearer"}
-    if form_layout.username == "student" and form_layout.password == "student123":
+    if form_layout.username == "gyandeep" and form_layout.password == "gyandeep123":
         token_created_student = token_creator(
             {"email": "student@universal.com", "name": "uni_student", "role": "student"}
         )
