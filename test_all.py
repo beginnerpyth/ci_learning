@@ -29,7 +29,7 @@ def test_one():
 
 def test_log():
     test_token = client.post(
-        "/login", data={"username": "student", "password": "student123"}
+        "/login", data={"username": "gyandeep", "password": "123"}
     )
     # OAuth2PasswordRequestForm expects the username/password as form data.
     token = test_token.json()["access_token"]  # .json()means return
